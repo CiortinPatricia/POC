@@ -1,0 +1,124 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GetMinMaxMed" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransactionItem" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_TransactionData" Type="InArgument(sd:DataTable)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1206,1234</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GetMinMaxMed_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="GetMinMaxMed" sap:VirtualizedContainerService.HintSize="797,1169" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Double" Name="MAX" />
+      <Variable x:TypeArguments="x:Double" Name="MIN" />
+      <Variable x:TypeArguments="x:Double" Name="MED" />
+      <Variable x:TypeArguments="sd:DataTable" Name="Centralizator" />
+      <Variable x:TypeArguments="sd:DataTable" Name="inVar" />
+      <Variable x:TypeArguments="sd:DataTable" Name="outVar" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xD;&#xA;&#xD;&#xA;'get &quot;FUNCTIE&quot;, &quot;Departament&quot;, &quot;Subdepartament&quot; lists&#xD;&#xA;&#xD;&#xA;Dim Functie = New List(Of String)&#xD;&#xA;Functie = (From r As DataRow In in_TransactionData.Rows.Cast(Of DataRow)()Select convert.ToString(r(&quot;FUNCTIE&quot;))).ToList&#xD;&#xA;Functie = Functie.Distinct.ToList&#xD;&#xA;&#xD;&#xA;Dim Departament = New List(Of String)&#xD;&#xA;Departament = (From r As DataRow In in_TransactionData.Rows.Cast(Of DataRow)()Select convert.ToString(r(&quot;Departament&quot;))).ToList&#xD;&#xA;Departament = Departament.Distinct.ToList&#xD;&#xA;&#xD;&#xA;Dim Subdep = New List(Of String)&#xD;&#xA;Subdep =  in_TransactionData.AsEnumerable.Select(Function(R As datarow) convert.ToString(r(&quot;Subdepartament&quot;))).toList&#xD;&#xA;Subdep = Subdep.Distinct.ToList&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;out_Centralizator = in_TransactionData.Clone ' get in_TransactionData datatable headers&#xD;&#xA;&#xD;&#xA;'design .xlsx file&#xD;&#xA;&#xD;&#xA;out_Centralizator.Columns.Remove(&quot;CUI&quot;)&#xD;&#xA;out_Centralizator.Columns.Remove(&quot;Subdepartament&quot;)&#xD;&#xA;&#xD;&#xA;out_Centralizator.Columns(&quot;FUNCTIE&quot;).ColumnName = &quot;TYPE&quot;&#xD;&#xA;out_Centralizator.Columns(&quot;Departament&quot;).ColumnName = &quot;VALUE&quot;&#xD;&#xA;&#xD;&#xA;out_Centralizator = MinMaxMed(out_Centralizator, in_TransactionData, &quot;CUI&quot;, in_TransactionItem) 'get min, max, med for company CUI&#xD;&#xA;&#x9;&#xD;&#xA;For Each element As String In Departament &#xD;&#xA;out_Centralizator.merge(MinMaxMed(out_Centralizator, in_TransactionData, &quot;Departament&quot;, element)) 'get min, max, med for company Departament&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;For Each element As String In Subdep&#xD;&#xA; out_Centralizator.merge(MinMaxMed(out_Centralizator, in_TransactionData, &quot;Subdepartament&quot;, element)) 'get min, max, med for company Subdepartament&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;For Each element As String In Functie &#xD;&#xA;out_Centralizator.merge(MinMaxMed(out_Centralizator, in_TransactionData, &quot;FUNCTIE&quot;, element)) 'get min, max, med for company FUNCTIE&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Catch ex As Exception&#xD;&#xA;&#x9;console.WriteLine(ex.Message)&#xD;&#xA;&#x9;Throw ex&#xD;&#xA;End Try&#xD;&#xA;End Sub 'end main&#xD;&#xA;&#xD;&#xA;'calculate median function&#xD;&#xA;&#xD;&#xA;Function Median(data As List(Of Double)) As Double&#xD;&#xA; data.Sort&#xD;&#xA;&#x9;If data.Count Mod 2 = 0 Then&#xD;&#xA;&#x9;&#x9;Return (data(data.Count \ 2 - 1) + data(data.Count \ 2)) / 2&#xD;&#xA;&#x9;Else&#xD;&#xA;&#x9;&#x9;Return data(data.Count \ 2)&#xD;&#xA;&#x9;End If&#xD;&#xA;End Function&#xD;&#xA;&#xD;&#xA;'function for min, max, med datatables&#xD;&#xA;&#xD;&#xA;Function MinMaxMed(data As DataTable, trData As DataTable, TIP As String, Denumire As String) as DataTable&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Dim MIN As Double&#xD;&#xA;Dim MAX As Double&#xD;&#xA;Dim MED as Double&#xD;&#xA;&#xD;&#xA;If TIP = &quot;CUI&quot;&#xD;&#xA;&#xD;&#xA;Dim MinList As New list(Of String)&#xD;&#xA;Dim MaxList As New list(Of String)&#xD;&#xA;Dim MedList As New list(Of String)&#xD;&#xA;&#xD;&#xA;'design .xlsx file&#xD;&#xA;MinList.Add(&quot; &quot;)&#xD;&#xA;MinList.Add(&quot;MIN&quot;)&#xD;&#xA;&#xD;&#xA;MaxList.Add(Denumire)&#xD;&#xA;MaxList.Add(&quot;MAX&quot;)&#xD;&#xA;&#xD;&#xA;MedList.Add(&quot; &quot;)&#xD;&#xA;MedList.Add(&quot;MED&quot;)&#xD;&#xA;&#xD;&#xA;'get min, max, med for every column in datatable for current CUI&#xD;&#xA;For Each column As DataColumn In data.Columns.Cast(Of DataColumn).Skip(2) &#xD;&#xA;&#xD;&#xA;Dim SortList As New List(Of Double)&#xD;&#xA;&#xD;&#xA;SortList = (From r As DataRow In trData.Rows.Cast(Of DataRow)()Select convert.ToDouble(r(column.ColumnName))).ToList&#xD;&#xA;&#xD;&#xA;MIN = SortList.Min&#xD;&#xA;MAX = SortList.Max&#xD;&#xA;MED = Median(SortList)&#xD;&#xA;&#xD;&#xA;'add min, max, med to lists&#xD;&#xA;MinList.Add(MIN.ToString)&#xD;&#xA;MaxList.Add(MAX.ToString)&#xD;&#xA;MedList.Add(MED.ToString)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;'add min, max, med in datatable&#xD;&#xA;&#xD;&#xA;data.Rows.Add(MinList.ToArray)&#xD;&#xA;data.Rows.Add(MaxList.ToArray)&#xD;&#xA;data.Rows.Add(MedList.ToArray)&#xD;&#xA;&#xD;&#xA;data.Rows.Add({&quot;.&quot;})&#xD;&#xA;&#xD;&#xA;Return data&#xD;&#xA;&#xD;&#xA;Else &#xD;&#xA;&#xD;&#xA;trData = trData.AsEnumerable.Where(Function(x) x(TIP).ToString = Denumire).CopyToDataTable 'get Departament/Subdepartament/Functie values&#xD;&#xA;&#xD;&#xA;Dim MinList As New list(Of String)&#xD;&#xA;Dim MaxList As New list(Of String)&#xD;&#xA;Dim MedList As New list(Of String)&#xD;&#xA;&#xD;&#xA;'design .xlsx file&#xD;&#xA;MinList.Add(&quot; &quot;)&#xD;&#xA;MinList.Add(&quot;MIN&quot;)&#xD;&#xA;&#xD;&#xA;MaxList.Add(Denumire)&#xD;&#xA;MaxList.Add(&quot;MAX&quot;)&#xD;&#xA;&#xD;&#xA;MedList.Add(&quot; &quot;)&#xD;&#xA;MedList.Add(&quot;MED&quot;)&#xD;&#xA;&#xD;&#xA;'get min, max, med&#xD;&#xA;For Each column As DataColumn In data.Columns.Cast(Of DataColumn).Skip(2)&#xD;&#xA;&#xD;&#xA;Dim SortList As New List(Of Double)&#xD;&#xA;&#xD;&#xA;SortList = trData.AsEnumerable.Select(Function(R As datarow) convert.ToDouble(r(column.ColumnName))).tolist&#xD;&#xA;&#xD;&#xA;MIN = SortList.Min&#xD;&#xA;MAX = SortList.Max&#xD;&#xA;MED = Median(SortList)&#xD;&#xA;&#xD;&#xA;'add items to lists&#xD;&#xA;MinList.Add(MIN.ToString)&#xD;&#xA;MaxList.Add(MAX.ToString)&#xD;&#xA;MedList.Add(MED.ToString)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;'add lists in datatable&#xD;&#xA;data.Rows.Add(MinList.ToArray)&#xD;&#xA;data.Rows.Add(MaxList.ToArray)&#xD;&#xA;data.Rows.Add(MedList.ToArray)&#xD;&#xA;&#xD;&#xA;data.Rows.Add({&quot;.&quot;})&#xD;&#xA;&#xD;&#xA;Return data&#xD;&#xA;&#xD;&#xA;end if&#xD;&#xA;&#xD;&#xA;End Function&#xD;&#xA;&#xD;&#xA;Sub fakemain 'end&#xD;&#xA;&#xD;&#xA;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="755,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_TransactionData">[in_TransactionData]</InArgument>
+        <OutArgument x:TypeArguments="x:Double" x:Key="MAX">[MAX]</OutArgument>
+        <OutArgument x:TypeArguments="x:Double" x:Key="MIN">[MIN]</OutArgument>
+        <OutArgument x:TypeArguments="x:Double" x:Key="MED">[MED]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_Centralizator">[Centralizator]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <If Condition="[file.Exists(&quot;MinMaxMed.xlsx&quot;)]" DisplayName="Write MinMaxMed file" sap:VirtualizedContainerService.HintSize="755,873" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="376,715" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ReadRange AddHeaders="True" DataTable="[inVar]" DisplayName="Read MinMaxMed" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="Centralizator" WorkbookPath="Data\Output\MinMaxMed.xlsx">
+            <ui:ReadRange.Range>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </ui:ReadRange.Range>
+          </ui:ReadRange>
+          <ui:Comment sap:VirtualizedContainerService.HintSize="334,169" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Read MinMaxMed created. The output (inVar) for this activity should be the table already written in the .xlsx file. inVar is used to merge data with Centralizator datatable which collects data for CUI, Departament, Subdepartament, FUNCTIE MIN, MED, MAX for every company CUI" />
+          <ui:MergeDataTable Destination="[inVar]" DisplayName="Merge Centralizator to inVar" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Add" Source="[Centralizator]" />
+          <ui:WriteRange AddHeaders="True" DataTable="[inVar]" DisplayName="Write Centralizator Sheet in MinMaxMed " sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Centralizator" StartingCell="A1" WorkbookPath="Data\Output\MinMaxMed.xlsx" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <ui:WriteRange AddHeaders="True" DataTable="[Centralizator]" DisplayName="Write MinMaxMed for the first time" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Centralizator" StartingCell="A1" WorkbookPath="Data\Output\MinMaxMed.xlsx" />
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>
